@@ -1,19 +1,25 @@
 import React from "react";
+import { keyGenerator } from "../../utils/key-generator";
 import style from "./index.module.css";
 interface Props {
   label: string;
-  Icon: JSX.Element[];
+  icons: JSX.Element[];
+  className?: string;
 }
 /**
  * semantic components for displaying item with an icon
  * @param label the name of the Item
  * @param Icon the icon component
  */
-const Item: React.FC<Props> = ({ label, Icon }) => {
+const Item: React.FC<Props> = ({ label, icons, className }) => {
   return (
-    <div className={style.container}>
-      <span>{label}</span>
-      <div>{Icon}</div>
+    <div className={`${style.container} ${className ? className : ""}`}>
+      <span>
+        <b>{label}</b>
+      </span>
+      {icons.map((icon) => (
+        <React.Fragment key={keyGenerator()}>{icon}</React.Fragment>
+      ))}
     </div>
   );
 };

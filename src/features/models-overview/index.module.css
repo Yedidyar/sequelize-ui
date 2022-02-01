@@ -1,0 +1,7 @@
+.container {
+  width: 30%;
+  user-select: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
