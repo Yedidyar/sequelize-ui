@@ -1,6 +1,7 @@
 import { Card, Dialog, Elevation, Icon } from "@blueprintjs/core";
 import { Tooltip2 } from "@blueprintjs/popover2";
 import { useState } from "react";
+import { Schema } from "../../../assets/icons";
 import Item from "../../../components/Item";
 import { useGetModelSchemaByNameQuery } from "../../../services/sequelize";
 import { keyGenerator } from "../../../utils/key-generator";
@@ -28,9 +29,8 @@ const ModelOverview: React.FC<Props> = ({ model }) => {
                 position="right"
                 isOpen={isTooltipOpen}
               >
-                <Icon
+                <div
                   key={keyGenerator()}
-                  icon={"eye-open"}
                   onClick={() => {
                     setIsOpen(true);
                     setIsTooltipOpen(false);
@@ -42,7 +42,9 @@ const ModelOverview: React.FC<Props> = ({ model }) => {
                     setIsTooltipOpen(false);
                   }}
                   style={{ cursor: "pointer" }}
-                />
+                >
+                  <Schema />
+                </div>
               </Tooltip2>,
             ]}
           ></Item>

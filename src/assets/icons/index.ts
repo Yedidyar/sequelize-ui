@@ -1,2 +1,3 @@
 import { ReactComponent as View } from "./view.svg";
-export { View };
+import { ReactComponent as Schema } from "./schema.svg";
+export { View, Schema };
