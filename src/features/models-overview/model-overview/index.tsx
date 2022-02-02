@@ -1,4 +1,4 @@
-import { Card, Dialog, Elevation, Icon } from "@blueprintjs/core";
+import { Card, Dialog, Elevation } from "@blueprintjs/core";
 import { Tooltip2 } from "@blueprintjs/popover2";
 import { useState } from "react";
 import { Schema } from "../../../assets/icons";
@@ -26,24 +26,24 @@ const ModelOverview: React.FC<Props> = ({ model }) => {
             icons={[
               <Tooltip2
                 content={"show model schema"}
-                position="right"
+                placement="right"
                 isOpen={isTooltipOpen}
+                openOnTargetFocus={false}
               >
-                <div
-                  key={keyGenerator()}
-                  onClick={() => {
-                    setIsOpen(true);
-                    setIsTooltipOpen(false);
-                  }}
-                  onMouseOver={() => {
-                    setIsTooltipOpen(true);
-                  }}
-                  onMouseLeave={() => {
-                    setIsTooltipOpen(false);
-                  }}
-                  style={{ cursor: "pointer" }}
-                >
-                  <Schema />
+                <div key={keyGenerator()}>
+                  <Schema
+                    onClick={() => {
+                      setIsOpen(true);
+                      setIsTooltipOpen(false);
+                    }}
+                    onMouseOver={() => {
+                      setIsTooltipOpen(true);
+                    }}
+                    onMouseLeave={() => {
+                      setIsTooltipOpen(false);
+                    }}
+                    style={{ cursor: "pointer" }}
+                  />
                 </div>
               </Tooltip2>,
             ]}
