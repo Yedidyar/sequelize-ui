@@ -1,10 +1,14 @@
-import ModelsOverview from "./features/models-overview";
 import style from "./App.module.css";
+import ModelDashboard from "./features/model-dashboard";
+import Navbar from "./features/navbar";
 
 const App = () => {
   return (
     <div className={style.container}>
-      <ModelsOverview />
+      <div style={{ flex: 1 }}>
+        <Navbar />
+      </div>
+      <ModelDashboard />
     </div>
   );
 };

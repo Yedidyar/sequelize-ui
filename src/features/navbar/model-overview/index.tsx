@@ -1,6 +1,6 @@
 import { Card, Dialog, Elevation } from "@blueprintjs/core";
 import { Tooltip2 } from "@blueprintjs/popover2";
-import { useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Schema } from "../../../assets/icons";
 import Item from "../../../components/Item";
 import { useGetModelSchemaByNameQuery } from "../../../services/sequelize";
@@ -15,6 +15,29 @@ const ModelOverview: React.FC<Props> = ({ model }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isTooltipOpen, setIsTooltipOpen] = useState(false);
   const { data } = useGetModelSchemaByNameQuery(model);
+  const mouseMoveRef = useRef<HTMLDivElement>(null);
+
+  const checkHover = useCallback(
+    (e: MouseEvent) => {
+      if (mouseMoveRef.current) {
+        const el = e.target;
+        const mouseOver =
+          el instanceof Node && mouseMoveRef.current.contains(el);
+        if (!isTooltipOpen && mouseOver) setIsTooltipOpen(true);
+
+        if (isTooltipOpen && !mouseOver) setIsTooltipOpen(false);
+      }
+    },
+    [isTooltipOpen]
+  );
+
+  useEffect(() => {
+    window.addEventListener("mousemove", checkHover, true);
+
+    return () => {
+      window.removeEventListener("mousemove", checkHover, true);
+    };
+  }, [checkHover]);
 
   return (
     <Card interactive={false} elevation={Elevation.TWO} className={style.card}>
@@ -30,7 +53,7 @@ const ModelOverview: React.FC<Props> = ({ model }) => {
                 isOpen={isTooltipOpen}
                 openOnTargetFocus={false}
               >
-                <div key={keyGenerator()}>
+                <div key={keyGenerator()} ref={mouseMoveRef}>
                   <Schema
                     onClick={() => {
                       setIsOpen(true);
