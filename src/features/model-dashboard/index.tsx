@@ -1,10 +1,11 @@
-import React from 'react';
-// import { useLocation } from 'react-router-dom';
+import React from "react";
+import { useMatch } from "react-router-dom";
 
 const ModelDashboard = () => {
-//   const location = useLocation();
-// TODO: #2 add regex pattern for matching model
-  return <div style={{ flex: 4, background: "#666" }}></div>;
+  const match = useMatch("/model/:model");
+  return (
+    <div style={{ flex: 4, background: "#666" }}>{match?.params.model}</div>
+  );
 };
 
 export default ModelDashboard;
